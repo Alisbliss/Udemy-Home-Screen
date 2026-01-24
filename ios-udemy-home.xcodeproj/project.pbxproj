@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F8D8181F2F250DD80021015E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8D8181E2F250DD80021015E /* SnapKit */; };
-		F8D818212F250DD80021015E /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F8D818202F250DD80021015E /* SnapKit-Dynamic */; };
+		F8D818612F2519F00021015E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8D818602F2519F00021015E /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8D8181F2F250DD80021015E /* SnapKit in Frameworks */,
-				F8D818212F250DD80021015E /* SnapKit-Dynamic in Frameworks */,
+				F8D818612F2519F00021015E /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,8 +83,7 @@
 			);
 			name = "ios-udemy-home";
 			packageProductDependencies = (
-				F8D8181E2F250DD80021015E /* SnapKit */,
-				F8D818202F250DD80021015E /* SnapKit-Dynamic */,
+				F8D818602F2519F00021015E /* SnapKit */,
 			);
 			productName = "ios-udemy-home";
 			productReference = F8D818052F250D830021015E /* ios-udemy-home.app */;
@@ -117,7 +114,7 @@
 			mainGroup = F8D817FC2F250D830021015E;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				F8D8181D2F250DD80021015E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F8D8185F2F2519F00021015E /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F8D818062F250D830021015E /* Products */;
@@ -355,7 +352,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F8D8181D2F250DD80021015E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		F8D8185F2F2519F00021015E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -366,15 +363,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F8D8181E2F250DD80021015E /* SnapKit */ = {
+		F8D818602F2519F00021015E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F8D8181D2F250DD80021015E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = F8D8185F2F2519F00021015E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		F8D818202F250DD80021015E /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8D8181D2F250DD80021015E /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
