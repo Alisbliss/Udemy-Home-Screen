@@ -25,7 +25,7 @@ final class HomeCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupUIModel(uiModel: HomeUIModel) {
+    func setDataSource(uiModel: HomeUIModel) {
         self.uiModel = uiModel
         self.applySnapshort()
     }
@@ -68,7 +68,7 @@ final class HomeCollectionView: UICollectionView {
             guard let sectionModel = self?.uiModel?.sectionModels[index] else { return nil }
             switch sectionModel.section {
             case .mainBanner:
-                return self?.makeBannerSection()
+                return self?.makeMainBannerSection()
             case .textHeader:
                 guard case let .textHeader(_, text, _) = sectionModel.body.first else { return nil }
                 return self?.makeHeaderSection(text: text)
@@ -90,12 +90,14 @@ final class HomeCollectionView: UICollectionView {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 8, trailing: 20)
         return section
     }
-    private func makeBannerSection() -> NSCollectionLayoutSection {
+    private func makeMainBannerSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let layoutsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(220))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutsize, subitems: [item])
-        return NSCollectionLayoutSection(group: group)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
+        return section
         
     }
 }

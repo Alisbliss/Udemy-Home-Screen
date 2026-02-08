@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
                     highlightedText: "Mobile Development")
             ])
         ])
-        collectionView.setupUIModel(uiModel: uiModel)
+        collectionView.setDataSource(uiModel: uiModel)
     }
 
     private func setupView() {
