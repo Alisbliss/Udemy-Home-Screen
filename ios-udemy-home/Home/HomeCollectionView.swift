@@ -70,7 +70,8 @@ final class HomeCollectionView: UICollectionView {
             case .mainBanner:
                 return self?.makeBannerSection()
             case .textHeader:
-                return self?.makeHeaderSection()
+                guard case let .textHeader(_, text, highlightedText) = sectionModel.body.first else { return nil }
+                return self?.makeHeaderSection(text: text, highlightedText: highlightedText)
             default:
                 fatalError()
             }
@@ -78,10 +79,16 @@ final class HomeCollectionView: UICollectionView {
         return UICollectionViewCompositionalLayout(sectionProvider: provider)
     }
     
-    private func makeHeaderSection() -> NSCollectionLayoutSection {
+    private func makeHeaderSection(
+        text: String,
+        highlightedText: String?
+    )-> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
+        let label = AttributedTappableLabel()
+        label.setAttributedText(text: text, highlightedText: highlightedText)
+        let height = label.heightForWidth(frame.size.width)
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(height))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 8, trailing: 20)

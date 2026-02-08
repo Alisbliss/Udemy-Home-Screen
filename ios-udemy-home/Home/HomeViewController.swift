@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
             .init(section: .textHeader(id: "2321"), body: [
                 .textHeader(
                     id: "232",
-                    text: "Newest couerses in Mobile Development",
+                    text: "Newest cources in Mobile Development",
                     highlightedText: "Mobile Development")
             ])
         ])
