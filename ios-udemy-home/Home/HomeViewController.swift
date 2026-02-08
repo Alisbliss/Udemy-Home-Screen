@@ -57,6 +57,9 @@ class HomeViewController: UIViewController {
                     reviewCount: 459,
                     price: 19.99,
                     tag: "bestsellar")
+            ]),
+            .init(section: .textHeader(id: "656756"), body: [
+                .textHeader(id: "244556", text: "Categories", highlightedText: nil)
             ])
         ])
         collectionView.setDataSource(uiModel: uiModel)
