@@ -35,6 +35,7 @@ final class HomeCollectionView: UICollectionView {
         register(TextHeaderCollectionViewCell.self, forCellWithReuseIdentifier: TextHeaderCollectionViewCell.namedIdentifier)
         register(CourseCollectionViewCell.self,
                  forCellWithReuseIdentifier: CourseCollectionViewCell.namedIdentifier)
+        register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: CategoriesCollectionViewCell.namedIdentifier)
     }
     
     private func setupDataSource() {
@@ -51,6 +52,10 @@ final class HomeCollectionView: UICollectionView {
             case let .course(_, imageLink, title, author, rating, reviewCount, price, tag):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CourseCollectionViewCell.namedIdentifier, for: indexPath) as! CourseCollectionViewCell
                 cell.configure(imageLink: imageLink, title: title, author: author, rating: rating, reviewCount: reviewCount, price: price, tag: tag)
+                return cell
+            case let .categoriesScroller(_, titles):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCollectionViewCell.namedIdentifier, for: indexPath) as! CategoriesCollectionViewCell
+                cell.configure(titles: titles)
                 return cell
             default:
                 fatalError()
@@ -80,12 +85,26 @@ final class HomeCollectionView: UICollectionView {
                 return self?.makeHeaderSection(text: text)
             case .courseSwimLine:
                 return self?.makeCourceSection()
+            case .categories:
+                return self?.makeCategorySection()
             default:
                 fatalError()
             }
         }
         return UICollectionViewCompositionalLayout(sectionProvider: provider)
     }
+    
+    private func makeCategorySection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let layoutsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(88))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutsize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20)
+        return section
+        
+    }
+    
     private func makeCourceSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
