@@ -28,6 +28,35 @@ class HomeViewController: UIViewController {
                     id: "232",
                     text: "Newest cources in Mobile Development",
                     highlightedText: "Mobile Development")
+            ]),
+            .init(section: .courseSwimLine(id: "234"), body: [
+                .course(
+                    id: "12395",
+                    imageLink: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNvZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
+                    title: "iOS & Swift: Server Driven UI Compositional Layout & SwiftUI",
+                    author: "Kelvin Fok",
+                    rating: 4.5,
+                    reviewCount: 4569,
+                    price: 19.99,
+                    tag: "bestsellar"),
+                .course(
+                    id: "12348",
+                    imageLink: "https://plus.unsplash.com/premium_photo-1661877737564-3dfd7282efcb?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29kaW5nfGVufDB8fDB8fHww",
+                    title: "iOS & Swift: Swift UI Mastery",
+                    author: "Kelvin Fok",
+                    rating: 5.0,
+                    reviewCount: 69,
+                    price: 19.99,
+                    tag: "bestsellar"),
+                .course(
+                    id: "12345",
+                    imageLink: "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGNvZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
+                    title: "iOS & Swift: Auto Layout",
+                    author: "Kelvin Fok",
+                    rating: 4.7,
+                    reviewCount: 459,
+                    price: 19.99,
+                    tag: "bestsellar")
             ])
         ])
         collectionView.setDataSource(uiModel: uiModel)

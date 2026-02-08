@@ -33,6 +33,8 @@ final class HomeCollectionView: UICollectionView {
         backgroundColor = .white
         register(MainBannerCollectionViewCell.self, forCellWithReuseIdentifier: MainBannerCollectionViewCell.namedIdentifier)
         register(TextHeaderCollectionViewCell.self, forCellWithReuseIdentifier: TextHeaderCollectionViewCell.namedIdentifier)
+        register(CourseCollectionViewCell.self,
+                 forCellWithReuseIdentifier: CourseCollectionViewCell.namedIdentifier)
     }
     
     private func setupDataSource() {
@@ -45,6 +47,10 @@ final class HomeCollectionView: UICollectionView {
             case let .textHeader(_, text, highlightedText):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TextHeaderCollectionViewCell.namedIdentifier, for: indexPath) as! TextHeaderCollectionViewCell
                 cell.configure(text: text, highlightedText: highlightedText)
+                return cell
+            case let .course(_, imageLink, title, author, rating, reviewCount, price, tag):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CourseCollectionViewCell.namedIdentifier, for: indexPath) as! CourseCollectionViewCell
+                cell.configure(imageLink: imageLink, title: title, author: author, rating: rating, reviewCount: reviewCount, price: price, tag: tag)
                 return cell
             default:
                 fatalError()
@@ -72,11 +78,26 @@ final class HomeCollectionView: UICollectionView {
             case .textHeader:
                 guard case let .textHeader(_, text, _) = sectionModel.body.first else { return nil }
                 return self?.makeHeaderSection(text: text)
+            case .courseSwimLine:
+                return self?.makeCourceSection()
             default:
                 fatalError()
             }
         }
         return UICollectionViewCompositionalLayout(sectionProvider: provider)
+    }
+    private func makeCourceSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let layoutsize = NSCollectionLayoutSize(widthDimension: .absolute(160), heightDimension: .absolute(200))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutsize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20)
+        // make sections scroll horizontally
+        section.orthogonalScrollingBehavior = .continuous
+        return section
+        
     }
     
     private func makeHeaderSection(
