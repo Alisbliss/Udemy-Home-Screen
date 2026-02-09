@@ -70,12 +70,12 @@ final class HomeCollectionView: UICollectionView {
                     self?.eventSubject.send(.itemTapped(item))
                 }
                 return cell
-            case let .categoriesScroller(_, titles):
+            case let .categoriesScroller(id, titles):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCollectionViewCell.namedIdentifier, for: indexPath) as! CategoriesCollectionViewCell
                 cell.configure(titles: titles)
                 cell.onTap = { [weak self] title in
-                    //self?.eventSubject.send(.itemTapped(item))
-                    print(">>>>>> category tapped is \(title)")
+                    let selected = HomeUIModel.Item.categoriesScroller(id: id, titles: [title])
+                    self?.eventSubject.send(.itemTapped(selected))
                 }
                 return cell
             case let .featuredCourse(_, imageLink, title, author, rating, reviewCount, price):

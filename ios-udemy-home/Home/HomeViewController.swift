@@ -168,7 +168,8 @@ class HomeViewController: UIViewController {
         case .udemyBusinessBanner(id: let id, link: let link):
             print(">>>>>> udemyBusinessTapped tapped")
         case .categoriesScroller(id: let id, titles: let titles):
-            print(">>>>>> Caregory tapped")
+            guard let title = titles.first else { return }
+            print(">>>>>> Caregory tapped \(title)")
         case .featuredCourse(id: let id, imageLink: let imageLink, title: let title, author: let author, rating: let rating, reviewCount: let reviewCount, price: let price):
             print(">>>>>> CheaturedCource tapped")
         }
