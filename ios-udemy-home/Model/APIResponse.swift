@@ -5,3 +5,6 @@
 //  Created by Алеся Афанасенкова on 24.01.2026.
 //
 
+struct APIResponse: Decodable {
+    
+}

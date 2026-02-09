@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     override func loadView() {
         super.loadView()
         observe()
+        loadJSON()
     }
     
     override func viewDidLoad() {
@@ -203,6 +204,10 @@ class HomeViewController: UIViewController {
         guard let url = URL(string: link) else { return }
         let safaryViewController = SFSafariViewController(url: url)
         navigationController?.present(safaryViewController, animated: true)
+    }
+    
+    private func loadJSON() {
+        let response: APIResponse? = FileManager.modelFromJSON(fileName: "Payload")
     }
 }
 
