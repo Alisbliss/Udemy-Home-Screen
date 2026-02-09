@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Combine
+import SafariServices
 
 class HomeViewController: UIViewController {
 
@@ -141,11 +142,20 @@ class HomeViewController: UIViewController {
                     reviewCount: 69,
                     price: 19.99)
             ]),
-            .init(section: .udemyBusinessBanner(id: "7656576565656"), body: [.udemyBusinessBanner(id: "76576565675", link: "https://www.example.com")
+            .init(section: .udemyBusinessBanner(id: "7656576565656"), body: [.udemyBusinessBanner(id: "76576565675", link: "https://www.udemy.com")
                 
             ])
         ])
         collectionView.setDataSource(uiModel: uiModel)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     private func observe() {
@@ -159,19 +169,20 @@ class HomeViewController: UIViewController {
     
     private func handleItemTapped(item: HomeUIModel.Item) {
         switch item {
-        case .mainBanner(id: let id, imageLink: let imageLink, title: let title, caption: let caption):
-            print(">>>>>> MainBanner tapped")
-        case .course(id: let id, imageLink: let imageLink, title: let title, author: let author, rating: let rating, reviewCount: let reviewCount, price: let price, tag: let tag):
+        case .mainBanner:
+            break
+        case let .course(_, _, title, _, _, _, _, _):
             print(">>>>>> Cource tapped")
-        case .textHeader(id: let id, text: let text, highlightedText: let highlightedText):
-            print(">>>>>> textHeader tapped")
-        case .udemyBusinessBanner(id: let id, link: let link):
-            print(">>>>>> udemyBusinessTapped tapped")
-        case .categoriesScroller(id: let id, titles: let titles):
+            showCourseDetailViewController(title: title)
+        case .textHeader:
+            break
+        case let .udemyBusinessBanner(_, link):
+            showSafaryWebView(link: link)
+        case .categoriesScroller(id: _, titles: let titles):
             guard let title = titles.first else { return }
             print(">>>>>> Caregory tapped \(title)")
-        case .featuredCourse(id: let id, imageLink: let imageLink, title: let title, author: let author, rating: let rating, reviewCount: let reviewCount, price: let price):
-            print(">>>>>> CheaturedCource tapped")
+        case let .featuredCourse(_, i_, title, _, _, _, _):
+            showCourseDetailViewController(title: title)
         }
     }
     
@@ -182,5 +193,16 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func showCourseDetailViewController(title: String) {
+        let viewController = CourseDetailViewController()
+        viewController.setText(title: title)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showSafaryWebView(link: String) {
+        guard let url = URL(string: link) else { return }
+        let safaryViewController = SFSafariViewController(url: url)
+        navigationController?.present(safaryViewController, animated: true)
+    }
 }
 
