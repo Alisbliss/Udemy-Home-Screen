@@ -7,10 +7,17 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 class HomeViewController: UIViewController {
 
     private let collectionView = HomeCollectionView()
+    private var cancellable = Set<AnyCancellable>()
+    
+    override func loadView() {
+        super.loadView()
+        observe()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,6 +148,32 @@ class HomeViewController: UIViewController {
         collectionView.setDataSource(uiModel: uiModel)
     }
 
+    private func observe() {
+        collectionView.eventPublisher.sink { [weak self] event in
+            switch event {
+            case let .itemTapped(item):
+                self?.handleItemTapped(item: item)
+            }
+        }.store(in: &cancellable)
+    }
+    
+    private func handleItemTapped(item: HomeUIModel.Item) {
+        switch item {
+        case .mainBanner(id: let id, imageLink: let imageLink, title: let title, caption: let caption):
+            print(">>>>>> MainBanner tapped")
+        case .course(id: let id, imageLink: let imageLink, title: let title, author: let author, rating: let rating, reviewCount: let reviewCount, price: let price, tag: let tag):
+            print(">>>>>> Cource tapped")
+        case .textHeader(id: let id, text: let text, highlightedText: let highlightedText):
+            print(">>>>>> textHeader tapped")
+        case .udemyBusinessBanner(id: let id, link: let link):
+            print(">>>>>> udemyBusinessTapped tapped")
+        case .categoriesScroller(id: let id, titles: let titles):
+            print(">>>>>> Caregory tapped")
+        case .featuredCourse(id: let id, imageLink: let imageLink, title: let title, author: let author, rating: let rating, reviewCount: let reviewCount, price: let price):
+            print(">>>>>> CheaturedCource tapped")
+        }
+    }
+    
     private func setupView() {
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
