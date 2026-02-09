@@ -208,6 +208,7 @@ class HomeViewController: UIViewController {
     
     private func loadJSON() {
         let response: APIResponse? = FileManager.modelFromJSON(fileName: "Payload")
+        print(" Response: \(response)")
     }
 }
 
