@@ -12,6 +12,8 @@ final class TextHeaderCollectionViewCell: UICollectionViewCell {
     
     private let label = AttributedTappableLabel()
     
+    var onTap: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
@@ -34,8 +36,8 @@ final class TextHeaderCollectionViewCell: UICollectionViewCell {
         label.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        label.onTap = {
-            print(">>>> tapped")
+        label.onTap = { [weak self] in
+            self?.onTap?()
         }
     }
 }

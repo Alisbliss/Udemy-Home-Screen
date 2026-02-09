@@ -12,6 +12,8 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
     
     private var hostingController: UIHostingController<CategoriesView>!
     
+    var onTap: ((String) -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .gray
@@ -29,6 +31,9 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
         hostingController.view.clipsToBounds = true
         hostingController.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        hostingController.rootView.onTap = { [weak self] title in
+            self?.onTap?(title)
         }
     }
 }

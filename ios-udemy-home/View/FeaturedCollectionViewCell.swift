@@ -12,6 +12,8 @@ final class FeaturedCollectionViewCell: UICollectionViewCell {
     
     private var hostingController: UIHostingController<FeatuerCostView>!
     
+    var onTap: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -35,6 +37,9 @@ final class FeaturedCollectionViewCell: UICollectionViewCell {
         hostingController.view.clipsToBounds = true
         hostingController.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        hostingController.rootView.onTap = { [weak self] in
+            self?.onTap?()
         }
     }
 }

@@ -15,6 +15,8 @@ struct FeatuerCostView: View {
     let reviewCount: Int
     let price: Decimal
     
+    var onTap: (() -> Void)?
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             AsyncImage(url: URL(string: imageLink)) { image in
@@ -43,6 +45,9 @@ struct FeatuerCostView: View {
                 .font(.system(size: 10, weight: .bold))
             Spacer()
             
+        }
+        .onTapGesture {
+            onTap?()
         }
     }
 }

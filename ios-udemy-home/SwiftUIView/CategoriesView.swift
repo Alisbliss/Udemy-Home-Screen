@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesView: View {
     let titles: [String]
-    
+    var onTap: ((String) -> Void)?
     var midPoint: Int {
         return Int(titles.count / 2)
     }
@@ -19,14 +19,14 @@ struct CategoriesView: View {
                 HStack {
                     ForEach(titles[..<midPoint], id: \.self) { title in
                         CategoryButton(title: title) {
-                            print("tapped \(title)")
+                            onTap?(title)
                         }
                     }
                 }
                 HStack {
                     ForEach(titles[midPoint...], id: \.self) { title in
                         CategoryButton(title: title) {
-                            print("tapped \(title)")
+                            onTap?(title)
                         }
                     }
                 }
