@@ -37,6 +37,7 @@ final class HomeCollectionView: UICollectionView {
                  forCellWithReuseIdentifier: CourseCollectionViewCell.namedIdentifier)
         register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: CategoriesCollectionViewCell.namedIdentifier)
         register(FeaturedCollectionViewCell.self, forCellWithReuseIdentifier: FeaturedCollectionViewCell.namedIdentifier)
+        register(UdemyBusinessCollectionViewCell.self, forCellWithReuseIdentifier: UdemyBusinessCollectionViewCell.namedIdentifier)
     }
     
     private func setupDataSource() {
@@ -62,8 +63,12 @@ final class HomeCollectionView: UICollectionView {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCollectionViewCell.namedIdentifier, for: indexPath) as! FeaturedCollectionViewCell
                 cell.configure(imageLink: imageLink, title: title, author: author, rating: rating, reviewCount: reviewCount, price: price)
                 return cell
-            default:
-                fatalError()
+            case let .udemyBusinessBanner(_, link):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UdemyBusinessCollectionViewCell.namedIdentifier, for: indexPath) as! UdemyBusinessCollectionViewCell
+                cell.onTap = {
+                    print(">>> tapped on udemy Business \(link)")
+                }
+                return cell
             }
         })
     }
@@ -94,11 +99,21 @@ final class HomeCollectionView: UICollectionView {
                 return self?.makeCategorySection()
             case .faturedCourse:
                 return self?.makeFeatureCourceSection()
-            default:
-                fatalError()
+            case .udemyBusinessBanner:
+                return self?.makeUdemyBusinessSection()
             }
         }
         return UICollectionViewCompositionalLayout(sectionProvider: provider)
+    }
+    
+    func makeUdemyBusinessSection() -> NSCollectionLayoutSection {
+        let itemsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemsize)
+        let layoutsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(160))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutsize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20)
+        return section
     }
     
     func makeFeatureCourceSection() -> NSCollectionLayoutSection {
