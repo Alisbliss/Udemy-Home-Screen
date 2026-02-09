@@ -36,6 +36,7 @@ final class HomeCollectionView: UICollectionView {
         register(CourseCollectionViewCell.self,
                  forCellWithReuseIdentifier: CourseCollectionViewCell.namedIdentifier)
         register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: CategoriesCollectionViewCell.namedIdentifier)
+        register(FeaturedCollectionViewCell.self, forCellWithReuseIdentifier: FeaturedCollectionViewCell.namedIdentifier)
     }
     
     private func setupDataSource() {
@@ -56,6 +57,10 @@ final class HomeCollectionView: UICollectionView {
             case let .categoriesScroller(_, titles):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCollectionViewCell.namedIdentifier, for: indexPath) as! CategoriesCollectionViewCell
                 cell.configure(titles: titles)
+                return cell
+            case let .featuredCourse(_, imageLink, title, author, rating, reviewCount, price):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCollectionViewCell.namedIdentifier, for: indexPath) as! FeaturedCollectionViewCell
+                cell.configure(imageLink: imageLink, title: title, author: author, rating: rating, reviewCount: reviewCount, price: price)
                 return cell
             default:
                 fatalError()
@@ -87,11 +92,23 @@ final class HomeCollectionView: UICollectionView {
                 return self?.makeCourceSection()
             case .categories:
                 return self?.makeCategorySection()
+            case .faturedCourse:
+                return self?.makeFeatureCourceSection()
             default:
                 fatalError()
             }
         }
         return UICollectionViewCompositionalLayout(sectionProvider: provider)
+    }
+    
+    func makeFeatureCourceSection() -> NSCollectionLayoutSection {
+        let itemsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemsize)
+        let layoutsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(220))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutsize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20)
+        return section
     }
     
     private func makeCategorySection() -> NSCollectionLayoutSection {

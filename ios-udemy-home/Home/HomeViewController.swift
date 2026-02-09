@@ -117,8 +117,23 @@ class HomeViewController: UIViewController {
                     reviewCount: 69,
                     price: 19.99,
                     tag: "bestsellar")
+            ]),
+            .init(section: .textHeader(id: "689999999"), body: [
+                .textHeader(
+                    id: "76567575",
+                    text: "Top course of the year",
+                    highlightedText: nil)
+            ]),
+            .init(section: .faturedCourse(id: "65677667"), body:  [
+                .featuredCourse(
+                    id: "543667778",
+                    imageLink: "https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGNvZGluZ3xlbnwwfHwwfHx8MA%3D%3D",
+                    title: "iOS & Swift: Swift UI Mastery",
+                    author: "Kelvin Fok",
+                    rating: 5.0,
+                    reviewCount: 69,
+                    price: 19.99)
             ])
-            
         ])
         collectionView.setDataSource(uiModel: uiModel)
     }
