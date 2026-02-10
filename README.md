@@ -8,8 +8,8 @@ Tools: Built with UIKit, SnapKit for constraints, and integrated SwiftUI modules
 State Management: Managed data updates efficiently with Diffable Data Source.
 
 <p align="center">
-<img src="Snapshot/Start.png" alt="Start Screen" width="300"/>
-<img src="Snapshot/End.png" alt="End Screen" width="300"/>
-<img src="Snapshot/UdemyFromLink.png" alt="Udemy Screen" width="300"/>
-<img src="Snapshot/Course.png" alt="End Screen" width="300"/>
+<img src="Snapshot/Start.png" alt="Start Screen" width="200"/>
+<img src="Snapshot/End.png" alt="End Screen" width="200"/>
+<img src="Snapshot/UdemyFromLink.png" alt="Udemy Screen" width="200"/>
+<img src="Snapshot/Course.png" alt="End Screen" width="200"/>
 </p>
