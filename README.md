@@ -10,5 +10,4 @@ State Management: Managed data updates efficiently with Diffable Data Source.
 <p align="center">
 <img src="Snapshot/Start.png" alt="Start Screen" width="300"/>
 <img src="Snapshot/End.png" alt="End Screen" width="300"/>
-<img src="Snapshot/LinkUdemy.png" alt="Udemy Screen" width="300"/>
 </p>
