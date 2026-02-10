@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 import SafariServices
+import Alamofire
 
 class HomeViewController: UIViewController {
 
@@ -85,30 +86,21 @@ class HomeViewController: UIViewController {
     
     private func fetchLayout() {
         apiClient.fetchLayout()
-            .receive(on: DispatchQueue.main)
-            .sink
-        { [weak self] completion in
-            if case let .failure(error) = completion {
-                print(error)
-                let apiResponse: APIResponse? = FileManager.modelFromJSON(fileName: "Payload")
-                guard let response = apiResponse else { return }
-                let uiModel = HomeUIModelHelper.makeUIModel(response: response)
-                self?.collectionView.setDataSource(uiModel: uiModel)
+            .sink { [weak self] completion in
+                if case let .failure(error) = completion {
+                    print("Error: \(error)")
+                    let apiResponse: APIResponse? = FileManager.modelFromJSON(fileName: "Payload")
+                    self?.updateUI(with: apiResponse)
+                }
+            } receiveValue: { [weak self] apiResponse in
+                self?.updateUI(with: apiResponse)
             }
-        } receiveValue: { [weak self] apiPesponse in
-            let uiModel = HomeUIModelHelper.makeUIModel(response: apiPesponse)
-            self?.collectionView.setDataSource(uiModel: uiModel)
-        }.store(in: &cancellable)
+            .store(in: &cancellable)
     }
-}
-
-struct APIClient {
-    private let urlString = "https://mocki.io/v1/dcbfb0e8-1ddb-4606-bb67-393617e26fc7"
-    func fetchLayout() -> AnyPublisher<APIResponse, Error> {
-        let url = URL(string: urlString)!
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .map({ $0.data})
-            .decode(type: APIResponse.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+    
+    private func updateUI(with response: APIResponse?) {
+        guard let response = response else { return }
+        let uiModel = HomeUIModelHelper.makeUIModel(response: response)
+        self.collectionView.setDataSource(uiModel: uiModel)
     }
 }

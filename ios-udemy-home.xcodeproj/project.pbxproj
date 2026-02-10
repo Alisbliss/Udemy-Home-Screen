@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8CFEFB62F3B60C600A13D7F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F8CFEFB52F3B60C600A13D7F /* Alamofire */; };
 		F8D818612F2519F00021015E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8D818602F2519F00021015E /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8D818612F2519F00021015E /* SnapKit in Frameworks */,
+				F8CFEFB62F3B60C600A13D7F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = "ios-udemy-home";
 			packageProductDependencies = (
 				F8D818602F2519F00021015E /* SnapKit */,
+				F8CFEFB52F3B60C600A13D7F /* Alamofire */,
 			);
 			productName = "ios-udemy-home";
 			productReference = F8D818052F250D830021015E /* ios-udemy-home.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				F8D8185F2F2519F00021015E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F8CFEFB42F3B60C600A13D7F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F8D818062F250D830021015E /* Products */;
@@ -352,6 +356,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F8CFEFB42F3B60C600A13D7F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
 		F8D8185F2F2519F00021015E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -363,6 +375,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F8CFEFB52F3B60C600A13D7F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8CFEFB42F3B60C600A13D7F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		F8D818602F2519F00021015E /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F8D8185F2F2519F00021015E /* XCRemoteSwiftPackageReference "SnapKit" */;

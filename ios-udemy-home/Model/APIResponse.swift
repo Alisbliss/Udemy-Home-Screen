@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct APIResponse: Decodable {
+struct APIResponse: Decodable, Sendable {
     
     let status: Int
     let layouts: [Layout]
     
-    enum Layout: Decodable {
+    enum Layout: Decodable, Sendable {
         case mainBanner(String, MainBanner)
         case textHeader(String, TextHeader)
         case courseSwimlane(String, [Course])
@@ -21,7 +21,7 @@ struct APIResponse: Decodable {
         case udemyBusinessBanner(String, UdemyBusinessBanner)
         case unknown(String)
         
-        private enum CodingKeys: String, CodingKey {
+        private enum CodingKeys: String, CodingKey, Sendable {
             case type, value, id
         }
         init(from decoder: any Decoder) throws {
@@ -52,18 +52,18 @@ struct APIResponse: Decodable {
             }
         }
     }
-    struct MainBanner: Decodable {
+    struct MainBanner: Decodable, Sendable {
         let id: String
         let imageLink: String
         let title: String
         let caption: String
     }
-    struct TextHeader: Decodable {
+    struct TextHeader: Decodable, Sendable {
         let id: String
         let text: String
         let highlightedText: String?
     }
-    struct Course: Decodable {
+    struct Course: Decodable, Sendable {
         let id: String
         let imageLink: String
         let title: String
@@ -73,11 +73,11 @@ struct APIResponse: Decodable {
         let price: Decimal
         let tag: String
     }
-    struct Categories: Decodable {
+    struct Categories: Decodable, Sendable {
         let id: String
         let titles: [String]
     }
-    struct FeaturedCourse: Decodable {
+    struct FeaturedCourse: Decodable, Sendable {
         let id: String
         let imageLink: String
         let title: String
@@ -86,7 +86,7 @@ struct APIResponse: Decodable {
         let reviewCount: Int
         let price: Decimal
     }
-    struct UdemyBusinessBanner: Decodable {
+    struct UdemyBusinessBanner: Decodable, Sendable {
         let id: String
         let link: String
     }
