@@ -35,6 +35,6 @@ struct HomeUIModel: Hashable, Sendable {
     }
     
 }
+
 extension HomeUIModel.Section: @unchecked Sendable {}
 extension HomeUIModel.Item: @unchecked Sendable {}
-

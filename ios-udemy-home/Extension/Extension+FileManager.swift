@@ -15,8 +15,6 @@ extension FileManager {
             return nil }
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-//            let string = String(data: data, encoding: .utf8)
-//            print(string)
             return try JSONDecoder().decode(T.self, from: data)
         } catch {
             print("Decoding Error: \(error)")

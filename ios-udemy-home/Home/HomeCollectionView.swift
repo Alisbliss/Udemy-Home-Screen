@@ -15,10 +15,9 @@ final class HomeCollectionView: UICollectionView {
     }
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<HomeUIModel.Section, HomeUIModel.Item>!
-    
     private var uiModel: HomeUIModel?
-    
     private let eventSubject = PassthroughSubject<Event, Never>()
+    
     var eventPublisher: AnyPublisher<Event, Never> {
         return eventSubject.eraseToAnyPublisher()
     }
@@ -56,14 +55,14 @@ final class HomeCollectionView: UICollectionView {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainBannerCollectionViewCell.namedIdentifier, for: indexPath) as! MainBannerCollectionViewCell
                 cell.cofigure(imageLink: imageLink, title: title, caption: caption)
                 return cell
-            case let .textHeader(id, text, highlightedText):
+            case let .textHeader(_, text, highlightedText):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TextHeaderCollectionViewCell.namedIdentifier, for: indexPath) as! TextHeaderCollectionViewCell
                 cell.configure(text: text, highlightedText: highlightedText)
                 cell.onTap = { [weak self] in
                     self?.eventSubject.send(.itemTapped(item))
                 }
                 return cell
-            case let .course(id, imageLink, title, author, rating, reviewCount, price, tag):
+            case let .course(_, imageLink, title, author, rating, reviewCount, price, tag):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CourseCollectionViewCell.namedIdentifier, for: indexPath) as! CourseCollectionViewCell
                 cell.configure(imageLink: imageLink, title: title, author: author, rating: rating, reviewCount: reviewCount, price: price, tag: tag)
                 cell.onTap = { [weak self] in
@@ -85,7 +84,7 @@ final class HomeCollectionView: UICollectionView {
                     self?.eventSubject.send(.itemTapped(item))
                 }
                 return cell
-            case let .udemyBusinessBanner(_, link):
+            case .udemyBusinessBanner:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UdemyBusinessCollectionViewCell.namedIdentifier, for: indexPath) as! UdemyBusinessCollectionViewCell
                 cell.onTap = { [weak self] in
                     self?.eventSubject.send(.itemTapped(item))
@@ -192,6 +191,5 @@ final class HomeCollectionView: UICollectionView {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
         return section
-        
     }
 }

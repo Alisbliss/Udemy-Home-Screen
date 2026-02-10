@@ -23,7 +23,6 @@ struct ReviewRatingView: View {
             Text(reviewCount.formatted().withBrackets)
                 .foregroundStyle(.gray)
                 .font(.system(size: 10, weight: .semibold))
-            
         }
         
     }

@@ -28,9 +28,8 @@ class CourseDetailViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-32)
         }
     }
+    
     func setText(title: String) {
         titleLabel.text = title
     }
-    
-    
 }

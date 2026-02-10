@@ -15,4 +15,3 @@ extension Decimal {
         return formatter.string(from: self as NSDecimalNumber) ?? String(describing: self)
     }
 }
-

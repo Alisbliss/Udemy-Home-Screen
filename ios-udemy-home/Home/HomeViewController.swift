@@ -183,7 +183,7 @@ class HomeViewController: UIViewController {
         case .categoriesScroller(id: _, titles: let titles):
             guard let title = titles.first else { return }
             print(">>>>>> Caregory tapped \(title)")
-        case let .featuredCourse(_, i_, title, _, _, _, _):
+        case let .featuredCourse(_, _, title, _, _, _, _):
             showCourseDetailViewController(title: title)
         }
     }

@@ -35,6 +35,4 @@ final class UdemyBusinessCollectionViewCell: UICollectionViewCell {
             self?.onTap?()
         }
     }
-    
-    
 }
